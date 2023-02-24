@@ -14,23 +14,25 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          
-          textTheme: GoogleFonts.dmSansTextTheme(),
-          scaffoldBackgroundColor: Colors.black,
-          appBarTheme: AppBarTheme(
-              backgroundColor: Colors.black,
-              // titleTextStyle: GoogleFonts.dmSans(color: Colors.blue[100],fontSize: 24),
-              actionsIconTheme: IconThemeData(
-                color: Colors.white,
-              ))),
+        textTheme: GoogleFonts.dmSansTextTheme().apply(bodyColor: Colors.white),
+        scaffoldBackgroundColor: Colors.black12,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black,
+          // titleTextStyle: GoogleFonts.dmSans(color: Colors.blue[100],fontSize: 24),
+          actionsIconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+        ),
+      ),
+      // darkTheme: ThemeData(),
       themeMode: ThemeMode.dark,
       routes: {
-        'home': (context) => const HomePage(),
+        'home': (context) =>  HomePage(),
 // 'login': (context) => LoginPage(),
 // 'splash': (context) => SplashScreen(),
       },
       initialRoute: 'home',
-      home: const HomePage(),
+      // home:  HomePage(),
     );
   }
 }
