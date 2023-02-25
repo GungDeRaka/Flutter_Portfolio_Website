@@ -38,8 +38,6 @@ class MyContact extends StatelessWidget {
           SizedBox(
             width: 150,
             child: Text(
-              
-            
               subtitle,
               textAlign: TextAlign.center,
               style: TextStyle(
