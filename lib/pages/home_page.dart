@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/contact_widget.dart';
+import '../widgets/contact_form.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -187,10 +188,10 @@ class HomePage extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.grey[900],
                   borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    bottomRight: Radius.circular(8),
-                    topRight: Radius.circular(40),
-                    bottomLeft: Radius.circular(40),
+                    topLeft: Radius.circular(16),
+                    bottomRight: Radius.circular(16),
+                    topRight: Radius.elliptical(40, 60),
+                    bottomLeft: Radius.elliptical(40, 60),
                   ),
                   border: Border.all(
                     color: Colors.green,
@@ -205,13 +206,12 @@ class HomePage extends StatelessWidget {
                       size: 60.0,
                       color: Colors.green,
                     ),
-                   
                     SizedBox(
                       width: 600,
                       child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
                         controller: ScrollController(),
-                        child: Text(
+                        scrollDirection: Axis.vertical,
+                        child: const Text(
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                           style: TextStyle(
                             fontSize: 20.0,
@@ -219,34 +219,131 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                   
                     SizedBox(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "assets/images/github-mark-white.png",
-                            width: 64.0,
-                            height: 64.0,
-                            fit: BoxFit.fill,
-                          ),
-                          const SizedBox(
-                          height: 8.0,
-                          ),
-                          Image.asset(
-                            "assets/images/Github_Logo_White.png",
-                            width: 64.0,
-                            height: 32.0,
-                            fit: BoxFit.fill,
-                          ),
-                        ],
+                      child: InkWell(
+                        onTap: () {},
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "assets/images/github-mark-white.png",
+                              width: 64.0,
+                              height: 64.0,
+                              fit: BoxFit.fill,
+                            ),
+                            const SizedBox(
+                              height: 8.0,
+                            ),
+                            Image.asset(
+                              "assets/images/Github_Logo_White.png",
+                              width: 64.0,
+                              height: 32.0,
+                              fit: BoxFit.fill,
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   ],
                 ),
               ),
               SizedBox(
-                height: size.width * 0.1,
+                height: size.width * 0.08,
+              ),
+              Text(
+                "Project Showcase",
+                style: TextStyle(
+                  fontSize: 32.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 12.0,
+              ),
+              Container(
+                padding: const EdgeInsets.all(12),
+                height: size.width * 0.2,
+                width: size.width * 0.8,
+                decoration: BoxDecoration(
+                  color: Colors.grey[900],
+                ),
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.all(8),
+                      height: size.height * 0.9,
+                      width: size.width * 0.35,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(12.0),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(8),
+                      height: size.height * 0.9,
+                      width: size.width * 0.35,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(12.0),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(8),
+                      height: size.height * 0.9,
+                      width: size.width * 0.35,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(12.0),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(8),
+                      height: size.height * 0.9,
+                      width: size.width * 0.35,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(12.0),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(8),
+                      height: size.height * 0.9,
+                      width: size.width * 0.35,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(12.0),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: size.width * 0.08,
+              ),
+              Text(
+                "Get in touch",
+                style: TextStyle(
+                  fontSize: 32.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height:20,
+              ),
+              ContactForm(),
+              const SizedBox(
+              height: 32.0,
               ),
             ],
           ),
