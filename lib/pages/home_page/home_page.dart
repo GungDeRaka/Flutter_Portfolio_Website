@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_portfolio_website/util/sizing.dart';
 
-import '../util/color_palettes.dart';
-import '../widgets/contact_widget.dart';
-import '../widgets/contact_form.dart';
+import '../../util/color_palettes.dart';
+import 'widgets/contact_widget.dart';
+import 'widgets/contact_form.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../util/color_palettes.dart';
-import '../util/sizing.dart';
+import '../../../util/color_palettes.dart';
+import '../../../util/sizing.dart';
 
 class ContactForm extends StatelessWidget {
   const ContactForm({super.key});
