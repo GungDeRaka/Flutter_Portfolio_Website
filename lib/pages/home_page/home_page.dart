@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter_portfolio_website/pages/home_page/widgets/project_showcase.dart';
 import 'package:my_flutter_portfolio_website/util/sizing.dart';
 
 import '../../util/color_palettes.dart';
@@ -75,7 +76,7 @@ class HomePage extends StatelessWidget {
                       height: 8.0,
                     ),
                     Text(
-                      "A Flutter Moblie Apps Developer",
+                      "A Front-End Flutter Developer",
                       style: TextStyle(
                         fontSize: 12.0,
                         color: Colors.grey[100],
@@ -110,7 +111,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                 SizedBox(
+                SizedBox(
                   width: widthMedQuery(context, 0.2),
                 ),
                 CircleAvatar(
@@ -158,7 +159,7 @@ class HomePage extends StatelessWidget {
                 MyContact(
                   icon: Icons.mail,
                   title: "Email Address",
-                  subtitle: "aswinraka4@gamil.com",
+                  subtitle: "aswinraka4@gmail.com",
                 ),
                 MyContact(
                   icon: Icons.call,
@@ -259,75 +260,9 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 12.0,
             ),
-            Container(
-              padding: const EdgeInsets.all(12),
-              height: size.width * 0.2,
-              width: size.width * 0.8,
-              decoration: BoxDecoration(
-                color: Colors.grey[900],
-              ),
-              //FIXME projek sokes
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.all(8),
-                    height: size.height * 0.9,
-                    width: size.width * 0.35,
-                    decoration: BoxDecoration(
-                      color: kGreenColor,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(12.0),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(8),
-                    height: size.height * 0.9,
-                    width: size.width * 0.35,
-                    decoration: BoxDecoration(
-                      color: kGreenColor,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(12.0),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(8),
-                    height: size.height * 0.9,
-                    width: size.width * 0.35,
-                    decoration: BoxDecoration(
-                      color: kGreenColor,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(12.0),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(8),
-                    height: size.height * 0.9,
-                    width: size.width * 0.35,
-                    decoration: BoxDecoration(
-                      color: kGreenColor,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(12.0),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(8),
-                    height: size.height * 0.9,
-                    width: size.width * 0.35,
-                    decoration: BoxDecoration(
-                      color: kGreenColor,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(12.0),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            ProjectShowcase(),
+            //FIXME projek sokes
+
             SizedBox(
               height: size.width * 0.08,
             ),
@@ -339,15 +274,65 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height:20,
+              height: 20,
             ),
-            const ContactForm(),
+            ContactForm(),
             const SizedBox(
-            height: 32.0,
+              height: 32.0,
             ),
-            Divider( height: 12,color: Colors.white,),
-             const SizedBox(
-            height: 32.0,
+            Divider(
+              height: 12,
+              color: fadedFont,
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon:const ImageIcon(
+                    AssetImage(
+                      "assets/icons/instagram-logo.png",
+                    ),
+                    size: 40,
+                    color: fadedFont,
+                  ),
+                ),
+                const SizedBox(
+                  width: 12.0,
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon:const ImageIcon(
+                    AssetImage(
+                      "assets/icons/facebook.png",
+                    ),
+                    size: 40,
+                    color: fadedFont,
+                  ),
+                ),
+                const SizedBox(
+                  width: 12.0,
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon:const ImageIcon(
+                    AssetImage(
+                      "assets/icons/fiverr.png",
+                    ),
+                    size: 16,
+                    color: fadedFont,
+                  ),
+                ),
+                // const SizedBox(
+                //   width: 12.0,
+                // ),
+              ],
+            ),
+            const SizedBox(
+              height: 32.0,
             ),
           ],
         ),

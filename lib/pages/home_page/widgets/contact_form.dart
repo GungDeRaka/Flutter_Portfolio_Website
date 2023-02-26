@@ -4,11 +4,43 @@ import '../../../util/color_palettes.dart';
 import '../../../util/sizing.dart';
 
 class ContactForm extends StatelessWidget {
-  const ContactForm({super.key});
+  ContactForm({super.key});
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  InputDecoration basicFormDecoration(String label) {
+    return InputDecoration(
+      labelText: label,
+      labelStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.normal,
+        color: fadedFont,
+      ),
+      enabledBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: fadedFont,
+        ),
+      ),
+      focusColor: kGreenColor,
+      focusedBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: kGreenColor,
+          width: 2.4,
+        ),
+      ),
+    );
+  }
+
+  final TextEditingController firstNamec = TextEditingController();
+  final TextEditingController lastNameC = TextEditingController();
+  final TextEditingController emailC = TextEditingController();
+  final TextEditingController phoneNumberC = TextEditingController();
+  final TextEditingController messageC = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formKey,
       child: SizedBox(
         height: heightMedQuery(context, 0.9),
         width: widthMedQuery(context, 0.6),
@@ -24,27 +56,15 @@ class ContactForm extends StatelessWidget {
                 SizedBox(
                   width: 300,
                   child: TextFormField(
+                    controller: firstNamec,
                     cursorColor: kGreenColor,
-                    decoration: const InputDecoration(
-                      labelText: 'First Name',
-                      labelStyle: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                        color: fadedFont,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: fadedFont,
-                        ),
-                      ),
-                      focusColor: kGreenColor,
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: kGreenColor,
-                          width: 2.4,
-                        ),
-                      ),
-                    ),
+                    validator: (value) {
+                      if(value!.isEmpty || value == ' '){
+                        return "First name can't be empty";
+                      }
+                      return null;
+                    },
+                    decoration: basicFormDecoration('First Name'),
                   ),
                 ),
                 SizedBox(
@@ -53,28 +73,9 @@ class ContactForm extends StatelessWidget {
                 SizedBox(
                   width: 300,
                   child: TextFormField(
-                    cursorColor: kGreenColor,
-                    decoration: const InputDecoration(
-                      labelText: 'Last Name',
-                      labelStyle: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                        color: fadedFont,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: fadedFont,
-                        ),
-                      ),
-                      focusColor: kGreenColor,
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: kGreenColor,
-                          width: 2.4,
-                        ),
-                      ),
-                    ),
-                  ),
+                    controller: lastNameC,
+                      cursorColor: kGreenColor,
+                      decoration: basicFormDecoration('Last Name')),
                 ),
               ],
             ),
@@ -88,28 +89,15 @@ class ContactForm extends StatelessWidget {
                 SizedBox(
                   width: 300,
                   child: TextFormField(
-                    cursorColor: kGreenColor,
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      labelStyle: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                        color: fadedFont,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: fadedFont,
-                        ),
-                      ),
-                      focusColor: kGreenColor,
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: kGreenColor,
-                          width: 2.4,
-                        ),
-                      ),
-                    ),
-                  ),
+                    controller: emailC,
+                      cursorColor: kGreenColor,
+                      validator: (value) {
+                      if(value!.isEmpty || value == ' '|| !value.contains('@')){
+                        return "Email addres must contain '@'";
+                      }
+                      return null;
+                    },
+                      decoration: basicFormDecoration('Email Address')),
                 ),
                 SizedBox(
                   width: widthMedQuery(context, 0.12),
@@ -118,28 +106,15 @@ class ContactForm extends StatelessWidget {
                 SizedBox(
                   width: 300,
                   child: TextFormField(
-                    cursorColor: kGreenColor,
-                    decoration: const InputDecoration(
-                      labelText: 'Phone Number',
-                      labelStyle: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                        color: fadedFont,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: fadedFont,
-                        ),
-                      ),
-                      focusColor: kGreenColor,
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: kGreenColor,
-                          width: 2.4,
-                        ),
-                      ),
-                    ),
-                  ),
+                    validator: (value) {
+                      if(value!.isEmpty || value == ' ' || int.tryParse(value)!.isNaN){
+                        return "Input your phone number";
+                      }
+                      return null;
+                    },
+                    controller:phoneNumberC ,
+                      cursorColor: kGreenColor,
+                      decoration: basicFormDecoration('Phone Number')),
                 ),
               ],
             ),
@@ -148,8 +123,8 @@ class ContactForm extends StatelessWidget {
             ),
             //FIXME Message form
             const Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 8),
-              child:  Align(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Message",
@@ -167,6 +142,7 @@ class ContactForm extends StatelessWidget {
               height: heightMedQuery(context, 0.3),
               width: widthMedQuery(context, 0.6),
               child: TextFormField(
+                controller: messageC,
                 minLines: null,
                 maxLines: null,
                 expands: true,
@@ -196,7 +172,9 @@ class ContactForm extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: kGreenColor,
               ),
-              onPressed: () {},
+              onPressed: () {
+                formKey.currentState!.validate();
+              },
               child: const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text("Submit now"),
