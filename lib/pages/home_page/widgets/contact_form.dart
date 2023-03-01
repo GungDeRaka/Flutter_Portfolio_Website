@@ -6,7 +6,12 @@ import '../../../util/sizing.dart';
 class ContactForm extends StatelessWidget {
   ContactForm({super.key});
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController firstNamec = TextEditingController();
+  final TextEditingController lastNameC = TextEditingController();
+  final TextEditingController emailC = TextEditingController();
+  final TextEditingController phoneNumberC = TextEditingController();
+  final TextEditingController messageC = TextEditingController();
 
   InputDecoration basicFormDecoration(String label) {
     return InputDecoration(
@@ -31,12 +36,6 @@ class ContactForm extends StatelessWidget {
     );
   }
 
-  final TextEditingController firstNamec = TextEditingController();
-  final TextEditingController lastNameC = TextEditingController();
-  final TextEditingController emailC = TextEditingController();
-  final TextEditingController phoneNumberC = TextEditingController();
-  final TextEditingController messageC = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -59,7 +58,7 @@ class ContactForm extends StatelessWidget {
                     controller: firstNamec,
                     cursorColor: kGreenColor,
                     validator: (value) {
-                      if(value!.isEmpty || value == ' '){
+                      if (value!.isEmpty || value == ' ') {
                         return "First name can't be empty";
                       }
                       return null;
@@ -73,7 +72,7 @@ class ContactForm extends StatelessWidget {
                 SizedBox(
                   width: 300,
                   child: TextFormField(
-                    controller: lastNameC,
+                      controller: lastNameC,
                       cursorColor: kGreenColor,
                       decoration: basicFormDecoration('Last Name')),
                 ),
@@ -89,14 +88,16 @@ class ContactForm extends StatelessWidget {
                 SizedBox(
                   width: 300,
                   child: TextFormField(
-                    controller: emailC,
+                      controller: emailC,
                       cursorColor: kGreenColor,
                       validator: (value) {
-                      if(value!.isEmpty || value == ' '|| !value.contains('@')){
-                        return "Email addres must contain '@'";
-                      }
-                      return null;
-                    },
+                        if (value!.isEmpty ||
+                            value == ' ' ||
+                            !value.contains('@')) {
+                          return "Email addres must contain '@'";
+                        }
+                        return null;
+                      },
                       decoration: basicFormDecoration('Email Address')),
                 ),
                 SizedBox(
@@ -106,13 +107,15 @@ class ContactForm extends StatelessWidget {
                 SizedBox(
                   width: 300,
                   child: TextFormField(
-                    validator: (value) {
-                      if(value!.isEmpty || value == ' ' || int.tryParse(value)!.isNaN){
-                        return "Input your phone number";
-                      }
-                      return null;
-                    },
-                    controller:phoneNumberC ,
+                      validator: (value) {
+                        if (value!.isEmpty ||
+                            value == ' ' ||
+                            int.tryParse(value)!.isNaN) {
+                          return "Input your phone number e.g : +62XXXXXXXXXXX";
+                        }
+                        return null;
+                      },
+                      controller: phoneNumberC,
                       cursorColor: kGreenColor,
                       decoration: basicFormDecoration('Phone Number')),
                 ),
