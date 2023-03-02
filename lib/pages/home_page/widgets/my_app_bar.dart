@@ -7,7 +7,8 @@ class MyAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (ratio.maxWidth > 600) {
+    double maxWidth = ratio.maxWidth;
+    if (ratio.maxWidth > 610) {
       return AppBar(
         // centerTitle: (ratio.maxWidth > 600)? false : true,
         title: const Text("Gung De Raka"),
@@ -46,13 +47,57 @@ class MyAppBar extends StatelessWidget {
       );
     } else {
       return AppBar(
-        leading: const CircleAvatar(
-          radius: 8.0,
-        backgroundImage: AssetImage("assets/images/profile_image.png"),
-          backgroundColor: Colors.black,
+        leading: InkWell(
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                      contentPadding: EdgeInsets.zero,
+                      content: Container(
+                        height: maxWidth * 0.4,
+                        width: maxWidth * 0.4,
+                        decoration: const BoxDecoration(
+                          color: Colors.black,
+                          image: DecorationImage(
+                            image:
+                                AssetImage("assets/images/profile_image.png"),
+                          ),
+                        ),
+                      ),
+                    ));
+          },
+          child: CircleAvatar(
+            radius: null,
+            minRadius: 4,
+            maxRadius: 8,
+            backgroundImage: AssetImage(
+              "assets/images/profile_image.png",
+            ),
+            backgroundColor: Colors.transparent, 
+          ),
         ),
         title: const Text("Gung De Raka"),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.menu))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                showMenu(
+                    context: context,
+                    position: RelativeRect.fromSize(
+                        Rect.fromPoints(
+                            Offset(double.infinity, 0), Offset.infinite),
+                        Size(200, 200)),
+                    items: [
+                      PopupMenuItem(
+                          child: Text("text",
+                          style: TextStyle(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.bold,
+                          ),
+                          ),)
+                    ]);
+              },
+              icon: const Icon(Icons.menu))
+        ],
       );
     }
   }

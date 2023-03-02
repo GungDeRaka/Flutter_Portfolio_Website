@@ -15,17 +15,9 @@ class MainApp extends StatelessWidget {
       
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        textTheme: GoogleFonts.dmSansTextTheme().apply(bodyColor: Colors.white),
-        scaffoldBackgroundColor: Colors.black12,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.black,
-          // titleTextStyle: GoogleFonts.dmSans(color: Colors.blue[100],fontSize: 24),
-          actionsIconTheme: IconThemeData(
-            color: Colors.white,
-          ),
-        ),
+
       ),
-      // darkTheme: ThemeData(),
+       darkTheme: ThemeData.dark(useMaterial3: true),
       themeMode: ThemeMode.dark,
       routes: {
         'home': (context) =>  HomePage(),
