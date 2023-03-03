@@ -8,7 +8,7 @@ class MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double maxWidth = ratio.maxWidth;
-    if (ratio.maxWidth > 610) {
+    if (ratio.maxWidth > 650) {
       return AppBar(
         // centerTitle: (ratio.maxWidth > 600)? false : true,
         title: const Text("Gung De Raka"),

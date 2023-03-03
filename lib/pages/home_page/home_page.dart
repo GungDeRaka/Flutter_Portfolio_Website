@@ -3,7 +3,7 @@ import 'package:my_flutter_portfolio_website/pages/home_page/widgets/project_sho
 import 'package:my_flutter_portfolio_website/util/sizing.dart';
 
 import '../../util/color_palettes.dart';
-import 'widgets/contact_widget.dart';
+import 'widgets/contact_profile_widget.dart';
 import 'widgets/contact_form.dart';
 import 'widgets/my_app_bar.dart';
 import 'widgets/about_me.dart';
