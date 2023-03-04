@@ -4,8 +4,9 @@ import '../../../util/color_palettes.dart';
 import 'contact_profile_widget.dart';
 
 class AboutMe extends StatelessWidget {
-  const AboutMe(this.ratio, {super.key});
+  const AboutMe(this.ratio, this.aboutKey, {super.key});
   final BoxConstraints ratio;
+  final GlobalKey aboutKey;
 
   @override
   Widget build(BuildContext context) {
@@ -137,9 +138,10 @@ class AboutMe extends StatelessWidget {
             SizedBox(
               height: maxHeight * 0.1,
             ),
-            const Text(
+            Text(
               "About",
-              style: TextStyle(
+              key: aboutKey,
+              style:const TextStyle(
                 fontSize: 32.0,
                 fontWeight: FontWeight.bold,
               ),

@@ -66,7 +66,7 @@ class MyAppBar extends StatelessWidget {
                       ),
                     ));
           },
-          child: CircleAvatar(
+          child: const CircleAvatar(
             radius: null,
             minRadius: 4,
             maxRadius: 8,
@@ -84,10 +84,10 @@ class MyAppBar extends StatelessWidget {
                     context: context,
                     position: RelativeRect.fromSize(
                         Rect.fromPoints(
-                            Offset(double.infinity, 0), Offset.infinite),
-                        Size(200, 200)),
+                            const Offset(double.infinity, 0), Offset.infinite),
+                        const Size(200, 200)),
                     items: [
-                      PopupMenuItem(
+                      const PopupMenuItem(
                           child: Text("text",
                           style: TextStyle(
                           fontSize: 12.0,
