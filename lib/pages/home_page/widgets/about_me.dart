@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../util/color_palettes.dart';
+import '../../../util/sizing.dart';
 import 'contact_profile_widget.dart';
 
 class AboutMe extends StatelessWidget {
@@ -14,7 +15,7 @@ class AboutMe extends StatelessWidget {
     final double maxHeight = ratio.maxHeight;
     return Stack(
       children: [
-        (ratio.maxWidth > 650)
+        (ratio.maxWidth > mobileWidth)
             ? Container(
                 height: 515,
                 width: double.infinity,
@@ -58,7 +59,7 @@ class AboutMe extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: (ratio.maxWidth > 650) ? null : maxWidth * 0.7,
+                      width: (ratio.maxWidth > mobileWidth) ? null : maxWidth * 0.7,
                       child: const Text(
                         "Hi, I am\nAnak Agung Gede Raka Aswin Narottama",
                         style: TextStyle(
@@ -162,7 +163,7 @@ class AboutMe extends StatelessWidget {
             SizedBox(
               height: maxWidth * 0.04,
             ),
-            (maxWidth < 650 && maxWidth > 450)
+            (maxWidth < mobileWidth && maxWidth > 450)
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -248,7 +249,7 @@ class AboutMe extends StatelessWidget {
   }
 
   Widget myAvatar(double maxWidth, BuildContext context) {
-    if (ratio.maxWidth > 650) {
+    if (ratio.maxWidth > mobileWidth) {
       return Column(children: [
         SizedBox(
           width: maxWidth * 0.2,

@@ -7,3 +7,5 @@ double heightMedQuery(BuildContext context, double percent) {
 double widthMedQuery(BuildContext context, double percent) {
   return MediaQuery.of(context).size.width * percent;
 }
+
+double mobileWidth = 650;
