@@ -29,7 +29,7 @@ class MyContact extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 4),
+              padding: const EdgeInsets.symmetric(vertical: 4),
               child: Text(
                 title,
                 style: TextStyle(

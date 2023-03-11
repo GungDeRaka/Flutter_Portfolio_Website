@@ -11,4 +11,9 @@ class MyScreenContoller extends ChangeNotifier {
     BuildContext context = aboutKey.currentContext!;
     await Scrollable.ensureVisible(context);
   }
+
+  void toServicePart() async {
+    BuildContext context = servicesKey.currentContext!;
+    await Scrollable.ensureVisible(context);
+  }
 }
