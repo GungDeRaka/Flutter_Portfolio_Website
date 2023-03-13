@@ -21,32 +21,22 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return LayoutBuilder(builder: (BuildContext context, BoxConstraints ratio) {
-      double maxWidth = ratio.maxWidth;
-      return ChangeNotifierProvider<MyScreenContoller>(
+    return ChangeNotifierProvider<MyScreenContoller>(
         create: (context) => MyScreenContoller(),
         child: Scaffold(
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(AppBar().preferredSize.height),
-            child: MyAppBar(ratio),
+            child:const MyAppBar(),
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 36),
             controller: scrollController,
             child: Column(
               children: [
-                SizedBox(
-                  height: 40.0,
-                  child: Text(
-                    "${ratio.maxWidth}\n${ratio.maxHeight}",
-                    style: const TextStyle(
-                      fontSize: 11.0,
-                    ),
-                  ),
-                ),
+               
                 Consumer<MyScreenContoller>(
                   builder: (context,screen,_) {
-                    return AboutMe(ratio, screen.aboutKey);
+                    return AboutMe(aboutKey);
                   }
                 ),
                 SizedBox(
@@ -64,8 +54,8 @@ class HomePage extends StatelessWidget {
                   height: 24.0,
                 ),
                 Container(
-                  height: maxWidth * 0.2,
-                  width: maxWidth * 0.8,
+                  //FIXME height: maxWidth * 0.2,
+                  //FIXME width: maxWidth * 0.8,
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.grey[900],
@@ -89,7 +79,7 @@ class HomePage extends StatelessWidget {
                         color: kGreenColor,
                       ),
                       SizedBox(
-                        width: maxWidth * 0.5,
+                        //FIXME width: maxWidth * 0.5, 
                         child: SingleChildScrollView(
                           controller: ScrollController(),
                           scrollDirection: Axis.vertical,
@@ -109,8 +99,8 @@ class HomePage extends StatelessWidget {
                             children: [
                               Image.asset(
                                 "assets/images/github-mark-white.png",
-                                width: maxWidth * 0.09,
-                                height: maxWidth * 0.085,
+                                //FIXME width: maxWidth * 0.09,
+                                // height: maxWidth * 0.085,
                                 fit: BoxFit.fill,
                               ),
                               const SizedBox(
@@ -118,7 +108,7 @@ class HomePage extends StatelessWidget {
                               ),
                               Image.asset(
                                 "assets/images/Github_Logo_White.png",
-                                width: maxWidth * 0.09,
+                                //FIXME width: maxWidth * 0.09,
                                 height: 32.0,
                                 fit: BoxFit.fill,
                               ),
@@ -142,7 +132,7 @@ class HomePage extends StatelessWidget {
                 const SizedBox(
                   height: 12.0,
                 ),
-                ProjectShowcase(ratio),
+                //FIXME ProjectShowcase(ratio),
                 //FIXME projek sokes
 
                 SizedBox(
@@ -222,6 +212,5 @@ class HomePage extends StatelessWidget {
           ),
         ),
       );
-    });
   }
 }

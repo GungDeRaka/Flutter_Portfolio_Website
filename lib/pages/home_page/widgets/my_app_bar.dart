@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../../controller/screen_controller.dart';
 import '../../../util/sizing.dart';
 
 class MyAppBar extends StatelessWidget {
-  const MyAppBar(this.ratio, {super.key});
-
-  final BoxConstraints ratio;
+  const MyAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double maxWidth = ratio.maxWidth;
-    if (ratio.maxWidth > mobileWidth) {
-      return Consumer<MyScreenContoller>(
-        builder:(context, screen, child) =>  AppBar(
-          // centerTitle: (ratio.maxWidth > 600)? false : true,
-          title: const Text("Gung De Raka"),
-          actions: [
-            TextButton(
+    return Consumer<MyScreenContoller>(
+      builder: (context, screen, child) => AppBar(
+        leading: (ResponsiveWrapper.of(context).isSmallerThan(TABLET))
+            ? myLeading(context)
+            : null,
+        // centerTitle: (ratio.maxWidth > 600)? false : true,
+        title: const Text("Gung De Raka"),
+        actions: [
+          ResponsiveVisibility(
+            hiddenWhen: const [Condition.smallerThan(name: TABLET)],
+            child: TextButton(
               onPressed: () {
                 screen.toAboutMe();
               },
@@ -29,7 +31,10 @@ class MyAppBar extends StatelessWidget {
                 "About Me",
               ),
             ),
-            TextButton(
+          ),
+          ResponsiveVisibility(
+            hiddenWhen: const [Condition.smallerThan(name: TABLET)],
+            child: TextButton(
               onPressed: () {},
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -38,7 +43,10 @@ class MyAppBar extends StatelessWidget {
                 "Services",
               ),
             ),
-            TextButton(
+          ),
+          ResponsiveVisibility(
+            hiddenWhen: const [Condition.smallerThan(name: TABLET)],
+            child: TextButton(
               onPressed: () {},
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -47,71 +55,132 @@ class MyAppBar extends StatelessWidget {
                 "Contact",
               ),
             ),
-            const SizedBox(
-              width: 24.0,
-            ),
-          ],
-        ),
-      );
-    } else {
-      return AppBar(
-        leading: InkWell(
-          onTap: () {
-            showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                      contentPadding: EdgeInsets.zero,
-                      content: Container(
-                        height: maxWidth * 0.4,
-                        width: maxWidth * 0.4,
-                        decoration: const BoxDecoration(
-                          color: Colors.black,
-                          image: DecorationImage(
-                            image:
-                                AssetImage("assets/images/profile_image.png"),
-                          ),
+          ),
+          (ResponsiveWrapper.of(context).isSmallerThan(TABLET))
+              ? Padding(
+                padding: const EdgeInsets.only(right:12.0),
+                child: IconButton(
+                    onPressed: () {
+                      showMenu(
+                          context: context,
+                          position: RelativeRect.fromSize(
+                              Rect.fromPoints(const Offset(double.infinity, 0),
+                                  Offset.infinite),
+                              const Size(200, 200)),
+                          items: [
+                            const PopupMenuItem(
+                              child: Text(
+                                "text",
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )
+                          ]);
+                    },
+                    icon: const Icon(Icons.menu)),
+              )
+              : const SizedBox(
+                  width: 24.0,
+                ),
+        ],
+      ),
+    );
+  }
+
+  Widget myLeading(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                    contentPadding: EdgeInsets.zero,
+                    content: Container(
+                      height: 400,
+                      width: 400,
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/profile_image.png"),
                         ),
                       ),
-                    ));
-          },
-          child: const CircleAvatar(
-            radius: null,
-            minRadius: 4,
-            maxRadius: 8,
-            backgroundImage: AssetImage(
-              "assets/images/profile_image.png",
-            ),
-            backgroundColor: Colors.transparent, 
+                    ),
+                  ));
+        },
+        child: const CircleAvatar(
+          radius: null,
+          minRadius: 4,
+          maxRadius: 8,
+          backgroundImage: AssetImage(
+            "assets/images/profile_image.png",
           ),
+          backgroundColor: Colors.transparent,
         ),
-        title: const Text("Gung De Raka"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                showMenu(
-                    context: context,
-                    position: RelativeRect.fromSize(
-                        Rect.fromPoints(
-                            const Offset(double.infinity, 0), Offset.infinite),
-                        const Size(200, 200)),
-                    items: [
-                      const PopupMenuItem(
-                          child: Text("text",
-                          style: TextStyle(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.bold,
-                          ),
-                          ),)
-                    ]);
-              },
-              icon: const Icon(Icons.menu))
-        ],
-      );
-    }
+      ),
+    );
   }
 }
 
 
+
+  // } else {
+  //     return AppBar(
+  //       leading: InkWell(
+  //         onTap: () {
+  //           showDialog(
+  //               context: context,
+  //               builder: (context) => AlertDialog(
+  //                     contentPadding: EdgeInsets.zero,
+  //                     content: Container(
+  //                       height: 400,
+  //                       width: 400,
+  //                       decoration: const BoxDecoration(
+  //                         color: Colors.black,
+  //                         image: DecorationImage(
+  //                           image:
+  //                               AssetImage("assets/images/profile_image.png"),
+  //                         ),
+  //                       ),
+  //                     ),
+  //                   ));
+  //         },
+  //         child: const CircleAvatar(
+  //           radius: null,
+  //           minRadius: 4,
+  //           maxRadius: 8,
+  //           backgroundImage: AssetImage(
+  //             "assets/images/profile_image.png",
+  //           ),
+  //           backgroundColor: Colors.transparent, 
+  //         ),
+  //       ),
+  //       title: const Text("Gung De Raka"),
+  //       actions: [
+  //         IconButton(
+  //             onPressed: () {
+  //               showMenu(
+  //                   context: context,
+  //                   position: RelativeRect.fromSize(
+  //                       Rect.fromPoints(
+  //                           const Offset(double.infinity, 0), Offset.infinite),
+  //                       const Size(200, 200)),
+  //                   items: [
+  //                     const PopupMenuItem(
+  //                         child: Text("text",
+  //                         style: TextStyle(
+  //                         fontSize: 12.0,
+  //                         fontWeight: FontWeight.bold,
+  //                         ),
+  //                         ),)
+  //                   ]);
+  //             },
+  //             icon: const Icon(Icons.menu))
+  //       ],
+  //     );
+  //   }
 
 // (ratio.maxWidth > 650)
 //               ? AppBar(
@@ -167,8 +236,8 @@ class MyAppBar extends StatelessWidget {
 //                           builder: (context) => AlertDialog(
 //                                 contentPadding: EdgeInsets.zero,
 //                                 content: Container(
-//                                   height: maxWidth * 0.4,
-//                                   width: maxWidth * 0.4,
+//                                   height: 400,
+//                                   width: 400,
 //                                   decoration: const BoxDecoration(
 //                                     color: Colors.black,
 //                                     image: DecorationImage(

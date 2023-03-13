@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_portfolio_website/util/color_palettes.dart';
+import 'package:responsive_framework/responsive_wrapper.dart';
 
 class MyContact extends StatelessWidget {
-  const MyContact(this.ratio,
+  const MyContact(
       {super.key,
       required this.title,
       required this.subtitle,
@@ -11,11 +12,11 @@ class MyContact extends StatelessWidget {
   final String title;
   final String subtitle;
   final IconData icon;
-  final BoxConstraints ratio;
+
 
   @override
   Widget build(BuildContext context) {
-    if (ratio.maxWidth >= 450) {
+    if (ResponsiveWrapper.of(context).isLargerThan(MOBILE)) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -53,7 +54,7 @@ class MyContact extends StatelessWidget {
       );
     } else {
       return SizedBox(
-        width: ratio.maxWidth,
+        width: ResponsiveWrapper.of(context).screenWidth,
         child: ListTile(
           
           leading: CircleAvatar(

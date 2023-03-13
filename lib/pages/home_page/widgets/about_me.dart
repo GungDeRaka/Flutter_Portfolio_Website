@@ -1,55 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../../util/color_palettes.dart';
 import '../../../util/sizing.dart';
 import 'contact_profile_widget.dart';
 
 class AboutMe extends StatelessWidget {
-  const AboutMe(this.ratio, this.aboutKey, {super.key});
-  final BoxConstraints ratio;
+  const AboutMe(this.aboutKey, {super.key});
+
   final GlobalKey aboutKey;
 
   @override
   Widget build(BuildContext context) {
-    final double maxWidth = ratio.maxWidth;
-    final double maxHeight = ratio.maxHeight;
     return Stack(
       children: [
-        (ratio.maxWidth > mobileWidth)
-            ? Container(
-                height: 515,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  image: const DecorationImage(
-                    image: AssetImage(
-                      "assets/images/profile_image.png",
-                    ),
-                    opacity: 0.07,
-                  ),
-                ),
-              )
-            : Container(
-                height: 515,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black87,
-                      blurRadius: 32,
-                      spreadRadius: 40000,
-                      blurStyle: BlurStyle.inner,
-                      offset: Offset(double.infinity, double.infinity),
-                    ),
-                  ],
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  image: const DecorationImage(
-                      image: AssetImage(
-                        "assets/images/profile_image.png",
-                      ),
-                      opacity: 0.19),
-                ),
+        Container(
+          height: 515,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black87,
+                blurRadius: 32,
+                spreadRadius: 40000,
+                blurStyle: BlurStyle.inner,
+                offset: Offset(double.infinity, double.infinity),
               ),
+            ],
+            color: Theme.of(context).scaffoldBackgroundColor,
+            image: const DecorationImage(
+                image: AssetImage(
+                  "assets/images/profile_image.png",
+                ),
+                opacity: 0.19),
+          ),
+        ),
         Column(
           children: [
             Row(
@@ -59,7 +44,10 @@ class AboutMe extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: (ratio.maxWidth > mobileWidth) ? null : maxWidth * 0.7,
+                      width:
+                          (ResponsiveWrapper.of(context).isLargerThan(MOBILE))
+                              ? null
+                              : ResponsiveWrapper.of(context).screenWidth * 0.7,
                       child: const Text(
                         "Hi, I am\nAnak Agung Gede Raka Aswin Narottama",
                         style: TextStyle(
@@ -81,68 +69,45 @@ class AboutMe extends StatelessWidget {
                     const SizedBox(
                       height: 12.0,
                     ),
-                    (maxWidth > 325)
-                        ? Row(
-                            children: [
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: kGreenColor,
-                                ),
-                                onPressed: () {},
-                                child: const Text("Download CV"),
-                              ),
-                              const SizedBox(
-                                width: 12.0,
-                              ),
-                              OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: kGreenColor,
-                                  side: const BorderSide(
-                                    color: kGreenColor,
-                                  ),
-                                ),
-                                onPressed: () {},
-                                child: const Text("Learn more"),
-                              ),
-                            ],
-                          )
-                        : Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: kGreenColor,
-                                ),
-                                onPressed: () {},
-                                child: const Text("Download CV"),
-                              ),
-                              const SizedBox(
-                                height: 12.0,
-                              ),
-                              OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: kGreenColor,
-                                  side: const BorderSide(
-                                    color: kGreenColor,
-                                  ),
-                                ),
-                                onPressed: () {},
-                                child: const Text("Learn more"),
-                              ),
-                            ],
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: kGreenColor,
                           ),
+                          onPressed: () {},
+                          child: const Text("Download CV"),
+                        ),
+                        const SizedBox(
+                          width: 12.0,
+                        ),
+                        OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: kGreenColor,
+                            side: const BorderSide(
+                              color: kGreenColor,
+                            ),
+                          ),
+                          onPressed: () {},
+                          child: const Text("Learn more"),
+                        ),
+                      ],
+                    )
                   ],
                 ),
-                myAvatar(maxWidth, context)
+                (ResponsiveWrapper.of(context).isLargerThan(MOBILE))
+                    ? myAvatar(
+                        ResponsiveWrapper.of(context).scaledWidth, context)
+                    : SizedBox()
               ],
             ),
             SizedBox(
-              height: maxHeight * 0.1,
+              height: 20,
             ),
             Text(
               "About",
               key: aboutKey,
-              style:const TextStyle(
+              style: const TextStyle(
                 fontSize: 32.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -151,7 +116,7 @@ class AboutMe extends StatelessWidget {
               height: 12.0,
             ),
             SizedBox(
-              width: maxWidth * 0.8,
+              width: ResponsiveWrapper.of(context).scaledWidth * 0.8,
               child: const Text(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                 textAlign: TextAlign.center,
@@ -161,87 +126,31 @@ class AboutMe extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: maxWidth * 0.04,
+              height: ResponsiveWrapper.of(context).scaledWidth * 0.04,
             ),
-            (maxWidth < mobileWidth && maxWidth > 450)
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          MyContact(
-                            ratio,
-                            icon: Icons.account_circle_rounded,
-                            title: "Full Name",
-                            subtitle: "Anak Agung Gede Raka Aswin Narottama",
-                          ),
-                          MyContact(
-                            ratio,
-                            icon: Icons.mail,
-                            title: "Email Address",
-                            subtitle: "aswinraka4@gmail.com",
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 24.0,
-                      ),
-                      MyContact(
-                        ratio,
-                        icon: Icons.call,
-                        title: "Phone Number",
-                        subtitle: "+62-823-4182-2787",
-                      ),
-                    ],
-                  )
-                : (maxWidth < 450)
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          MyContact(
-                            ratio,
-                            icon: Icons.account_circle_rounded,
-                            title: "Full Name",
-                            subtitle: "Anak Agung Gede Raka Aswin Narottama",
-                          ),
-                          MyContact(
-                            ratio,
-                            icon: Icons.mail,
-                            title: "Email Address",
-                            subtitle: "aswinraka4@gmail.com",
-                          ),
-                          MyContact(
-                            ratio,
-                            icon: Icons.call,
-                            title: "Phone Number",
-                            subtitle: "+62-823-4182-2787",
-                          ),
-                        ],
-                      )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          MyContact(
-                            ratio,
-                            icon: Icons.account_circle_rounded,
-                            title: "Full Name",
-                            subtitle: "Anak Agung Gede Raka Aswin Narottama",
-                          ),
-                          MyContact(
-                            ratio,
-                            icon: Icons.mail,
-                            title: "Email Address",
-                            subtitle: "aswinraka4@gmail.com",
-                          ),
-                          MyContact(
-                            ratio,
-                            icon: Icons.call,
-                            title: "Phone Number",
-                            subtitle: "+62-823-4182-2787",
-                          ),
-                        ],
-                      ),
+            // (maxWidth < mobileWidth && maxWidth > 450)
+            //
+            Wrap(
+              runSpacing: 12,
+              alignment: WrapAlignment.spaceAround,
+              children: const [
+                MyContact(
+                  icon: Icons.account_circle_rounded,
+                  title: "Full Name",
+                  subtitle: "Anak Agung Gede Raka Aswin Narottama",
+                ),
+                MyContact(
+                  icon: Icons.mail,
+                  title: "Email Address",
+                  subtitle: "aswinraka4@gmail.com",
+                ),
+                MyContact(
+                  icon: Icons.call,
+                  title: "Phone Number",
+                  subtitle: "+62-823-4182-2787",
+                ),
+              ],
+            ),
           ],
         ),
       ],
@@ -249,11 +158,11 @@ class AboutMe extends StatelessWidget {
   }
 
   Widget myAvatar(double maxWidth, BuildContext context) {
-    if (ratio.maxWidth > mobileWidth) {
+    if (maxWidth > mobileWidth) {
       return Column(children: [
-        SizedBox(
-          width: maxWidth * 0.2,
-        ),
+        // SizedBox(
+        //   width: maxWidth * 0.2,
+        // ),
         CircleAvatar(
           radius: maxWidth * 0.1,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -262,8 +171,88 @@ class AboutMe extends StatelessWidget {
       ]);
     } else {
       return Column(
-        children: [],
+        children: const [],
       );
     }
   }
 }
+
+// (ResponsiveWrapper.of(context).isTablet)
+//     ? Column(
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         children: [
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: const [
+//               MyContact(
+
+//                 icon: Icons.account_circle_rounded,
+//                 title: "Full Name",
+//                 subtitle: "Anak Agung Gede Raka Aswin Narottama",
+//               ),
+//               MyContact(
+
+//                 icon: Icons.mail,
+//                 title: "Email Address",
+//                 subtitle: "aswinraka4@gmail.com",
+//               ),
+//             ],
+//           ),
+//           const SizedBox(
+//             height: 24.0,
+//           ),
+//           MyContact(
+
+//             icon: Icons.call,
+//             title: "Phone Number",
+//             subtitle: "+62-823-4182-2787",
+//           ),
+//         ],
+//       )
+//     : (ResponsiveWrapper.of(context).isPhone && ResponsiveWrapper.of(context).isMobile )
+//         ? Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: const [
+//               MyContact(
+
+//                 icon: Icons.account_circle_rounded,
+//                 title: "Full Name",
+//                 subtitle: "Anak Agung Gede Raka Aswin Narottama",
+//               ),
+//               MyContact(
+
+//                 icon: Icons.mail,
+//                 title: "Email Address",
+//                 subtitle: "aswinraka4@gmail.com",
+//               ),
+//               MyContact(
+
+//                 icon: Icons.call,
+//                 title: "Phone Number",
+//                 subtitle: "+62-823-4182-2787",
+//               ),
+//             ],
+//           )
+//         : Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//             children: const [
+//               MyContact(
+
+//                 icon: Icons.account_circle_rounded,
+//                 title: "Full Name",
+//                 subtitle: "Anak Agung Gede Raka Aswin Narottama",
+//               ),
+//               MyContact(
+
+//                 icon: Icons.mail,
+//                 title: "Email Address",
+//                 subtitle: "aswinraka4@gmail.com",
+//               ),
+//               MyContact(
+
+//                 icon: Icons.call,
+//                 title: "Phone Number",
+//                 subtitle: "+62-823-4182-2787",
+//               ),
+//             ],
+//           ),
